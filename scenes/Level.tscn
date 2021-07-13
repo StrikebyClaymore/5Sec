@@ -1,19 +1,12 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resources/tilesets/town_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 [ext_resource path="res://objects/Bird.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/Villager.tscn" type="PackedScene" id=5]
-[ext_resource path="res://resources/imgs/Food.png" type="Texture" id=6]
-[ext_resource path="res://objects/Food.gd" type="Script" id=7]
-[ext_resource path="res://objects/Guardian.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/sound/monplaisir-loyalty-freak-music-soundtrack.ogg" type="AudioStream" id=9]
 [ext_resource path="res://scenes/SettingsMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=11]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 7.24193
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 316.622, 10 )
@@ -88,15 +81,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Villager" parent="Villagers" instance=ExtResource( 5 )]
-position = Vector2( 80, 128 )
-
-[node name="Villager2" parent="Villagers" instance=ExtResource( 5 )]
-position = Vector2( 112, 128 )
-
-[node name="Guardian" parent="Villagers" instance=ExtResource( 8 )]
-position = Vector2( 14.0232, 107.79 )
-
 [node name="Birds" type="YSort" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -112,26 +96,6 @@ position = Vector2( 96, 140 )
 position = Vector2( 193, 20 )
 
 [node name="Food" type="Node2D" parent="."]
-position = Vector2( 73.1407, 97.8163 )
-script = ExtResource( 7 )
-
-[node name="Sprite" type="Sprite" parent="Food"]
-texture = ExtResource( 6 )
-hframes = 8
-vframes = 8
-
-[node name="Area2D" type="Area2D" parent="Food" groups=[
-"food",
-]]
-collision_layer = 34
-collision_mask = 34
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Area2D"]
-shape = SubResource( 1 )
-
-[node name="Tween" type="Tween" parent="Food"]
-
-[node name="Timer" type="Timer" parent="Food"]
 
 [node name="Bounds" type="Node2D" parent="."]
 __meta__ = {
@@ -407,9 +371,6 @@ pause_mode = 2
 stream = ExtResource( 9 )
 volume_db = -30.0
 
-[connection signal="body_entered" from="Food/Area2D" to="Food" method="_on_Area2D_body_entered"]
-[connection signal="tween_all_completed" from="Food/Tween" to="Food" method="_on_Tween_tween_all_completed"]
-[connection signal="timeout" from="Food/Timer" to="Food" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Bounds/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Road" to="." method="_on_Road_body_entered"]
 [connection signal="body_exited" from="Road" to="." method="_on_Road_body_exited"]

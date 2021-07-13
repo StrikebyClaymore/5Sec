@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/StartMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/SettingsMenu.tscn" type="PackedScene" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://resources/fonts/20832.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
 
 [node name="StartMenu" type="Control"]
 anchor_right = 1.0
@@ -50,6 +58,20 @@ __meta__ = {
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 2 )]
 visible = false
+
+[node name="Description" type="Label" parent="."]
+modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
+margin_left = 34.7302
+margin_top = 351.703
+margin_right = 469.73
+margin_bottom = 648.703
+custom_fonts/font = SubResource( 2 )
+text = "Бегать на wasd
+Подбирайте еду, пока дейстует правило пяти секунд
+Будьбе бдительны, ведь  стражники могут вас поймать"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]

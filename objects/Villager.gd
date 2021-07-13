@@ -32,7 +32,7 @@ func move_process(delta: float) -> void:
 func _on_DropFoodTimer_timeout():
 	var f = food_tscn.instance()
 	f.position = position + Vector2(0, -8)
-	get_tree().current_scene.add_child(f)
+	get_tree().current_scene.food.add_child(f)
 	if wait:
 		f.init(direction)
 	else:

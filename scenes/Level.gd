@@ -4,6 +4,7 @@ onready var villagers: YSort = $Villagers
 onready var villagers_spawn_timer: Timer = $VillagersSpawnTimer
 onready var player: Player = $Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
+onready var food: Node2D = $Food
 const  villager_tscn: PackedScene = preload("res://objects/Villager.tscn")
 const guardian_tscn: PackedScene = preload("res://objects/Guardian.tscn")
 var spawn_points: Array = []
@@ -18,14 +19,12 @@ func _ready():
 	randomize()
 	$Music.set_volume_db(global.volume)
 	$GUI/PauseMenu/SettingsMenu/Volume/HSlider.value = global.volume
-	#$Music.play(global.music_time)
+	$Music.play(global.music_time)
 	$GUI/Time/Label.text = start_day_time
 	spawn_points = $SpawnPoints.get_children()
 	villagers_spawn_timer.start()
 	world_time_timer.start()
 	$GUI.scale *= 1.5
-	$Villagers/Guardian.direction = Vector2.RIGHT
-	$Villagers/Guardian.patrol_direction = Vector2.RIGHT
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()

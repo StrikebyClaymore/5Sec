@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="5Sec"
-run/main_scene="res://scenes/Level.tscn"
+run/main_scene="res://scenes/StartMenu.tscn"
 config/icon="res://resources/imgs/logo.png"
 
 [autoload]
