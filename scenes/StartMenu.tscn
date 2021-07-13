@@ -17,6 +17,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -25,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -39,6 +41,7 @@ margin_right = 90.1557
 margin_bottom = -125.422
 text = "Start"
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -53,6 +56,7 @@ margin_right = 90.085
 margin_bottom = -47.3067
 text = "Settings"
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -70,8 +74,70 @@ text = "Бегать на wasd
 Подбирайте еду, пока дейстует правило пяти секунд
 Будьбе бдительны, ведь  стражники могут вас поймать"
 __meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LookAuthors" type="Button" parent="."]
+margin_left = 409.216
+margin_top = 575.757
+margin_right = 542.216
+margin_bottom = 619.757
+text = "Authors"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Authors" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Authors"]
+margin_left = 23.0
+margin_top = 19.0
+margin_right = 825.0
+margin_bottom = 617.0
+text = "Charecter 16x16
+Copyright/Attribution Notice: 
+Nothing! Do whatever! But please let me know if you publish anything with him, would love to play it :)
+
+Town_tiles
+Author: surt
+
+food
+unknow author CC0
+
+bird
+Copyright/Attribution Notice: 
+Spring/Flofflewoffle Flooferwoofer
+
+music
+Soundtrack by Monplaisir Loyalty Freak Music
+
+step sound
+Author: TinyWorlds"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Authors"]
+margin_left = 848.0
+margin_top = 13.0
+margin_right = 939.0
+margin_bottom = 58.0
+text = "Back"
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="LookAuthors" to="." method="_on_LookAuthors_pressed"]
+[connection signal="pressed" from="Authors/Back" to="." method="_on_Back_pressed"]
