@@ -11,3 +11,9 @@ unknow author CC0
 bird
 Copyright/Attribution Notice: 
 Spring/Flofflewoffle Flooferwoofer
+
+music
+Soundtrack by Monplaisir Loyalty Freak Music
+
+step sound
+Author: TinyWorlds

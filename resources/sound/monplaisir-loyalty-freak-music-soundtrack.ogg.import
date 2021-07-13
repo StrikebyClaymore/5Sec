@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/monplaisir-loyalty-freak-music-soundtrack.ogg-80f0ddfe326bc1e1b2d70aa2211d2ea8.oggstr"
+
+[deps]
+
+source_file="res://resources/sound/monplaisir-loyalty-freak-music-soundtrack.ogg"
+dest_files=[ "res://.import/monplaisir-loyalty-freak-music-soundtrack.ogg-80f0ddfe326bc1e1b2d70aa2211d2ea8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

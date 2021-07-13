@@ -5,7 +5,7 @@
 [ext_resource path="res://resources/imgs/guardian.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 37.019
+radius = 44.9797
 
 [node name="Guardian" groups=[
 "villager",

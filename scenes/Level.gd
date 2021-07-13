@@ -12,6 +12,9 @@ var satiety: int = 0
 
 func _ready():
 	randomize()
+	$Music.set_volume_db(global.volume)
+	$GUI/PauseMenu/SettingsMenu/Volume/HSlider.value = global.volume
+	$Music.play(global.music_time)
 	spawn_points = $SpawnPoints.get_children()
 	villagers_spawn_timer.start()
 	$GUI.scale *= 1.5
@@ -58,6 +61,11 @@ func wasted() -> void:
 								Color(1, 1, 1), Color(0, 0, 0), 2.0,
 								Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$GUI/Tween.start()
+	get_tree().paused = true
+
+func set_pause() -> void:
+	$GUI/PauseMenu.visible = not $GUI/PauseMenu.visible
+	get_tree().paused = not get_tree().paused
 
 func _on_VillagersSpawnTimer_timeout():
 	spawn_villager()
@@ -76,3 +84,5 @@ func _on_Road_body_exited(body):
 	if body is Guardian:
 		body.on_road = false
 
+func _on_Tween_tween_all_completed():
+	$GUI/PauseMenu.open_with_restart()

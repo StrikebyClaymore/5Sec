@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Character
 
 onready var animator: AnimationPlayer = $AnimationPlayer
+onready var step_audio_player = $AudioStreamPlayer2D
 var move_speed: float = 40.0
 var direction: = Vector2()
 var max_hp: int = 100
@@ -23,10 +24,13 @@ func play_anim() -> void:
 			animator.play("move_right")
 		else:
 			animator.play("move_left")
+	if not step_audio_player.playing:
+		step_audio_player.play()
 
 func stop_anim() -> void:
 	animator.stop()
 	$Sprite.frame_coords.x = 0
+	step_audio_player.stop()
 
 func on_hit(dmg:int) -> void:
 	hp = max(0, hp - dmg)
