@@ -5,15 +5,19 @@ const food_tscn: PackedScene = preload("res://objects/Food.tscn")
 onready var drop_food_timer: Timer = $DropFoodTimer
 onready var wait_timer: Timer = $WaitTimer
 
+var min_drop_food_time: int = 2
+var drop_food_time: int = 8
+var min_wait_time: int = 3
+var wait_time: int = 5
+
 var wait: bool = false
 
 
 func _ready():
-	drop_food_timer.wait_time = 2 + randi()%8 + randf()
+	set_timer_wait_time(drop_food_timer, min_drop_food_time, drop_food_time)
 	drop_food_timer.start()
-	wait_timer.wait_time = 3 + randi()%5 + randf()
+	set_timer_wait_time(wait_timer, min_wait_time, wait_time)
 	wait_timer.start()
-	pass
 
 func _physics_process(delta):
 	move_process(delta)
@@ -33,15 +37,18 @@ func _on_DropFoodTimer_timeout():
 		f.init(direction)
 	else:
 		f.init()
-	drop_food_timer.wait_time = 2 + randi()%8 + randf()
+	set_timer_wait_time(drop_food_timer, min_drop_food_time, drop_food_time)
 	drop_food_timer.start()
 
 func _on_WaitTimer_timeout():
-	if bool(int(round(randf()))):
+	if global.bool_rand():
 		wait = not wait
 		if wait:
 			drop_food_timer.stop()
-			drop_food_timer.wait_time = 2 + randi()%8 + randf()
+			set_timer_wait_time(drop_food_timer, min_drop_food_time, drop_food_time)
 			drop_food_timer.start()
-	wait_timer.wait_time = 3 + randi()%3 + randf()
+	set_timer_wait_time(wait_timer, min_wait_time, wait_time)
 	wait_timer.start()
+
+func set_timer_wait_time(timer:Timer, min_:int, time:int) -> void:
+	timer.wait_time = min_ + randi()%time + randf()

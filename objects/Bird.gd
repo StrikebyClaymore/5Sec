@@ -5,6 +5,10 @@ onready var wait_timer: Timer = $WaitTimer
 var wait: bool = false
 var roof_point: Vector2
 var target_point: Vector2
+var arrive_distance: float = 4.0
+
+var min_wait_time: int = 0.05
+var wait_time_divider: float = 4.0
 
 
 func _ready():
@@ -20,7 +24,7 @@ func _physics_process(delta):
 func fly_to_target(delta:float) -> void:
 	if position.distance_to(target_point) < move_speed * delta:
 		target_point = Vector2.ZERO
-		if position.distance_to(roof_point) < 4.0:
+		if position.distance_to(roof_point) < arrive_distance:
 			$CollisionShape2D.call_deferred("set_disabled", false)
 			stop_anim()
 		return
@@ -43,7 +47,7 @@ func stop_anim() -> void:
 
 func _on_FoodDetecter_area_entered(area):
 	if area.is_in_group("food") and target_point != roof_point and position.distance_to(area.global_position) < position.distance_to(target_point):
-		wait_timer.wait_time = 0.05 + randf() / 4.0
+		wait_timer.wait_time = min_wait_time + randf() / wait_time_divider
 		wait = true
 		area.get_parent().birds.append(self)
 		target_point = area.global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://resources/tilesets/town_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
@@ -45,6 +45,13 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 9 )
 
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.54902 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
 __meta__ = {
@@ -74,7 +81,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 114.968, 107.408 )
+position = Vector2( 114, 107 )
 
 [node name="Villagers" type="YSort" parent="."]
 __meta__ = {
@@ -240,7 +247,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="GUI"]
+[node name="WastedTween" type="Tween" parent="GUI"]
 pause_mode = 2
 
 [node name="PauseMenu" type="Control" parent="GUI"]
@@ -333,6 +340,69 @@ __meta__ = {
 visible = false
 rect_scale = Vector2( 0.68, 0.68 )
 
+[node name="Time" type="Panel" parent="GUI"]
+margin_left = 300.0
+margin_top = 4.0
+margin_right = 340.0
+margin_bottom = 18.0
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Time"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -19.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 9.0
+text = "8:00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="GUI/Time"]
+wait_time = 1.5
+
+[node name="Day" type="Panel" parent="GUI"]
+visible = false
+margin_left = 274.0
+margin_top = 96.0
+margin_right = 314.0
+margin_bottom = 110.0
+rect_scale = Vector2( 2, 2 )
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Day"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -19.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 9.0
+text = "Day 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndDay" type="Tween" parent="GUI/Day"]
+pause_mode = 2
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -30.0
@@ -344,8 +414,10 @@ volume_db = -30.0
 [connection signal="body_entered" from="Road" to="." method="_on_Road_body_entered"]
 [connection signal="body_exited" from="Road" to="." method="_on_Road_body_exited"]
 [connection signal="timeout" from="VillagersSpawnTimer" to="." method="_on_VillagersSpawnTimer_timeout"]
-[connection signal="tween_all_completed" from="GUI/Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="tween_all_completed" from="GUI/WastedTween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Resume" to="GUI/PauseMenu" method="_on_Resume_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Restart" to="GUI/PauseMenu" method="_on_Restart_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Settings" to="GUI/PauseMenu" method="_on_Settings_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Exit" to="GUI/PauseMenu" method="_on_Exit_pressed"]
+[connection signal="timeout" from="GUI/Time/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="tween_all_completed" from="GUI/Day/EndDay" to="." method="_on_EndDay_tween_all_completed"]

@@ -6,8 +6,11 @@ var state = States.NONE
 var patrol_direction: Vector2
 var target: Player
 var target_point: Vector2
+var arrive_distance: float = 16.0
+var road_arrive_distance: float = 2.0
 var road_point_y: float
 var on_road: bool = false
+
 
 func _ready():
 	patrol_direction = direction
@@ -21,19 +24,16 @@ func _physics_process(delta):
 			stop_anim()
 			return
 		direction = position.direction_to(target.position)
-		if position.distance_to(target.position) <= 16.0:
+		if position.distance_to(target.position) <= arrive_distance:
 			direction = Vector2.ZERO
 			catch_player()
 	elif state == States.BACk_TO_ROAD:
-		if position.distance_to(target_point) <= 16.0:
+		if position.distance_to(target_point) <= road_arrive_distance:
 			direction = patrol_direction
 			state = States.PATROL
 	move_process(delta)
 
-#func patrol(delta: float):
-#	pass
-
-func move_process(delta: float) -> void:
+func move_process(delta:float) -> void:
 	if direction == Vector2.ZERO:
 		stop_anim()
 		return

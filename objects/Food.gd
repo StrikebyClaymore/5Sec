@@ -26,7 +26,7 @@ func on_hit(dmg:int) -> void:
 
 func _on_Area2D_body_entered(body):
 	if body is Player:
-		get_tree().current_scene.eat_food(1)
+		get_tree().current_scene.eat_food(hp + randi()%2)
 		remove_on_bird()
 		queue_free()
 	if body is Bird:
