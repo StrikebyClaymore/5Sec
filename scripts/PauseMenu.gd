@@ -16,6 +16,7 @@ func _on_Resume_pressed():
 
 func _on_Restart_pressed():
 	global.music_time = get_tree().current_scene.get_node("Music").get_playback_position()
+	global.world_day = 1
 	get_tree().paused = false
 	get_tree().change_scene_to(global.game)
 
