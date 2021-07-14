@@ -14,6 +14,8 @@ var start_day_time: String = "8:00"
 var end_day_time: int = 18
 var min_villagers_spawn_time: int = 1
 var villagers_spawn_time: int = 3
+var tween_type: String
+
 
 func _ready():
 	randomize()
@@ -25,6 +27,8 @@ func _ready():
 	villagers_spawn_timer.start()
 	world_time_timer.start()
 	$GUI.scale *= 1.5
+	get_tree().paused = true
+	start_game()
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
@@ -47,7 +51,7 @@ func eat_food(value:int) ->  void:
 	satiety = min(100, satiety + value)
 	update_gui()
 	if $GUI/SatietyeProgress.value >= $GUI/SatietyeProgress.max_value:
-		next_day()
+		end_day()
 
 func update_gui() -> void:
 	$GUI/SatietyeProgress.value = satiety
@@ -62,10 +66,7 @@ func add_villagers_colliding_exeption(v: Character) -> void:
 func wasted() -> void:
 	get_tree().paused = true
 	$GUI/Wasted.visible = true
-	$GUI/WastedTween.interpolate_property(self, "modulate",
-								Color(1, 1, 1), Color(0, 0, 0), 2.0,
-								Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$GUI/WastedTween.start()
+	start_tween("wasted")
 
 func set_pause() -> void:
 	$GUI/PauseMenu.visible = not $GUI/PauseMenu.visible
@@ -80,26 +81,36 @@ func update_world_time() -> void:
 	if world_time.minut == 0:
 		$GUI/Time/Label.text += str(0)
 	if world_time.hour == end_day_time:
-		next_day()
+		end_day()
 
-func next_day() -> void:
+func end_day() -> void:
 	if $GUI/SatietyeProgress.value < $GUI/SatietyeProgress.max_value:
 		$GUI/Time.visible = false
 		wasted()
 		return
 	world_time_timer.stop()
-	#world_time.hour = 8
-	#world_time.minut = 0
 	global.world_day += 1
 	$GUI/Day/Label.text = "Day " + str(global.world_day)
 	$GUI/Time.visible = false
-	#$GUI/Time/Label.text = start_day_time
-	$GUI/Day/EndDay.interpolate_property(self, "modulate",
-								Color(1, 1, 1), Color(0, 0, 0), 2.0,
-								Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$GUI/Day/EndDay.start()
+	start_tween("end_day")
 	global.music_time = $Music.get_playback_position()
 	get_tree().paused = true
+
+func start_game() -> void:
+	$GUI/Day.visible = true
+	start_tween("start_game", true)
+
+func start_tween(type:String, inverted:bool = false) -> void:
+	tween_type = type
+	var start_color: = Color(1, 1, 1)
+	var end_color: = Color(0, 0, 0)
+	if inverted:
+		start_color = Color(0, 0, 0)
+		end_color = Color(1, 1, 1)
+	$Tween.interpolate_property(self, "modulate",
+						start_color, end_color, 2.0,
+						Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
 
 func _on_VillagersSpawnTimer_timeout():
 	spawn_villager()
@@ -118,26 +129,27 @@ func _on_Road_body_exited(body):
 	if body is Guardian:
 		body.on_road = false
 
-func _on_Tween_tween_all_completed():
-	$GUI/PauseMenu.open_with_restart()
-
 func _on_Timer_timeout():
 	update_world_time()
 
-func _on_EndDay_tween_all_completed():
-	$GUI/Day.visible = not $GUI/Day.visible
-	if $GUI/Day.visible:
-		for c in get_children():
-			if c.get("visible") and not c is TileMap:
-				c.visible = false
-		player.position = Vector2(114, 107)
-		$GUI/Day/EndDay.interpolate_property(self, "modulate",
-									Color(0, 0, 0), Color(1, 1, 1), 2.0,
-									Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$GUI/Day/EndDay.start()
-		#$GUI/Time.visible = true
-	else:
-		get_tree().paused = false
-		#world_time_timer.start()
-		get_tree().reload_current_scene()
-		#get_tree().change_scene_to(global.game)
+func _on_Tween_tween_all_completed():
+	match tween_type:
+		"start_game":
+			$GUI/Day.visible = false
+			get_tree().paused = false
+		"end_day":
+			$GUI/Day.visible = true
+			player.position = Vector2(114, 107)
+			start_tween("next_day", true)
+		"next_day":
+			$GUI/Day.visible = false
+			get_tree().paused = false
+			queue_free()
+			get_tree().reload_current_scene()
+		"wasted":
+			$GUI/PauseMenu.open_with_restart()
+
+
+
+
+

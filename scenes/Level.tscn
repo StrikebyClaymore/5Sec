@@ -74,9 +74,9 @@ __meta__ = {
 }
 
 [node name="YSort" type="YSort" parent="."]
-
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 114, 107 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Villagers" type="YSort" parent="YSort"]
 __meta__ = {
@@ -107,6 +107,9 @@ position = Vector2( 464, 24 )
 position = Vector2( 576, 140 )
 
 [node name="Food" type="Node2D" parent="YSort"]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 114, 107 )
 
 [node name="Bounds" type="Node2D" parent="."]
 __meta__ = {
@@ -192,6 +195,9 @@ shape = SubResource( 7 )
 [node name="VillagersSpawnTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Tween" type="Tween" parent="."]
+pause_mode = 2
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="SatietyeProgress" type="ProgressBar" parent="GUI"]
@@ -201,6 +207,7 @@ margin_right = 260.0
 margin_bottom = 20.0
 step = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -219,11 +226,9 @@ custom_fonts/normal_font = SubResource( 9 )
 text = " WASTED"
 scroll_active = false
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-
-[node name="WastedTween" type="Tween" parent="GUI"]
-pause_mode = 2
 
 [node name="PauseMenu" type="Control" parent="GUI"]
 pause_mode = 2
@@ -356,6 +361,7 @@ rect_scale = Vector2( 2, 2 )
 custom_styles/panel = SubResource( 10 )
 __meta__ = {
 "_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -375,9 +381,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EndDay" type="Tween" parent="GUI/Day"]
-pause_mode = 2
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -30.0
@@ -386,10 +389,9 @@ volume_db = -30.0
 [connection signal="body_entered" from="Road" to="." method="_on_Road_body_entered"]
 [connection signal="body_exited" from="Road" to="." method="_on_Road_body_exited"]
 [connection signal="timeout" from="VillagersSpawnTimer" to="." method="_on_VillagersSpawnTimer_timeout"]
-[connection signal="tween_all_completed" from="GUI/WastedTween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Resume" to="GUI/PauseMenu" method="_on_Resume_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Restart" to="GUI/PauseMenu" method="_on_Restart_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Settings" to="GUI/PauseMenu" method="_on_Settings_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Exit" to="GUI/PauseMenu" method="_on_Exit_pressed"]
 [connection signal="timeout" from="GUI/Time/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="tween_all_completed" from="GUI/Day/EndDay" to="." method="_on_EndDay_tween_all_completed"]
