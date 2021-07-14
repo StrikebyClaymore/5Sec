@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var villagers: YSort = $Villagers
+onready var villagers: YSort = $YSort/Villagers
 onready var villagers_spawn_timer: Timer = $VillagersSpawnTimer
-onready var player: Player = $Player
+onready var player: Player = $YSort/Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
-onready var food: Node2D = $Food
+onready var food: Node2D = $YSort/Food
 const  villager_tscn: PackedScene = preload("res://objects/Villager.tscn")
 const guardian_tscn: PackedScene = preload("res://objects/Guardian.tscn")
 var spawn_points: Array = []
@@ -98,6 +98,7 @@ func next_day() -> void:
 								Color(1, 1, 1), Color(0, 0, 0), 2.0,
 								Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$GUI/Day/EndDay.start()
+	global.music_time = $Music.get_playback_position()
 	get_tree().paused = true
 
 func _on_VillagersSpawnTimer_timeout():

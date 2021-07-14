@@ -73,38 +73,40 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 114, 107 )
 
-[node name="Villagers" type="YSort" parent="."]
+[node name="Villagers" type="YSort" parent="YSort"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Birds" type="YSort" parent="."]
+[node name="Birds" type="YSort" parent="YSort"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Bird" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 80, 24 )
 
-[node name="Bird2" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird2" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 96, 140 )
 
-[node name="Bird3" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird3" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 193, 20 )
 
-[node name="Bird4" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird4" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 336, 136 )
 
-[node name="Bird5" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird5" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 464, 24 )
 
-[node name="Bird6" parent="Birds" instance=ExtResource( 4 )]
+[node name="Bird6" parent="YSort/Birds" instance=ExtResource( 4 )]
 position = Vector2( 576, 140 )
 
-[node name="Food" type="Node2D" parent="."]
+[node name="Food" type="Node2D" parent="YSort"]
 
 [node name="Bounds" type="Node2D" parent="."]
 __meta__ = {
@@ -197,6 +199,7 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 260.0
 margin_bottom = 20.0
+max_value = 1.0
 step = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
