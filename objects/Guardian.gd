@@ -19,7 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if state == States.FOLLOW:
-		if not on_road:
+		if not on_road and not target.on_road:
 			direction = Vector2.ZERO
 			stop_anim()
 			return

@@ -1,6 +1,8 @@
 extends Character
 class_name Player
 
+var on_road: bool = false
+
 
 func _ready():
 	move_speed = 50.0

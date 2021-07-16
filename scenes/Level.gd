@@ -97,8 +97,11 @@ func end_day() -> void:
 	get_tree().paused = true
 
 func start_game() -> void:
-	$GUI/Day.visible = true
-	start_tween("start_game", true)
+	if global.world_day == 1:
+		$GUI/Day.visible = true
+		start_tween("start_game", true)
+	else:
+		get_tree().paused = false
 
 func start_tween(type:String, inverted:bool = false) -> void:
 	tween_type = type
@@ -122,11 +125,11 @@ func _on_Area2D_body_entered(body):
 		body.queue_free()
 
 func _on_Road_body_entered(body):
-	if body is Guardian:
+	if body is Guardian or body is Player:
 		body.on_road = true
 
 func _on_Road_body_exited(body):
-	if body is Guardian:
+	if body is Guardian or body is Player:
 		body.on_road = false
 
 func _on_Timer_timeout():
@@ -139,6 +142,9 @@ func _on_Tween_tween_all_completed():
 			get_tree().paused = false
 		"end_day":
 			$GUI/Day.visible = true
+			for c in get_children():
+				if c.get("visible") and not c is TileMap:
+					c.visible = false
 			player.position = Vector2(114, 107)
 			start_tween("next_day", true)
 		"next_day":
