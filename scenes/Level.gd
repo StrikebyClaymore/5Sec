@@ -5,6 +5,7 @@ onready var villagers_spawn_timer: Timer = $VillagersSpawnTimer
 onready var player: Player = $YSort/Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
 onready var food: Node2D = $YSort/Food
+onready var dialog_system: Control = $GUI/DialogSystem
 const  villager_tscn: PackedScene = preload("res://objects/Villager.tscn")
 const guardian_tscn: PackedScene = preload("res://objects/Guardian.tscn")
 var spawn_points: Array = []
@@ -21,19 +22,29 @@ func _ready():
 	randomize()
 	$Music.set_volume_db(global.volume)
 	$GUI/PauseMenu/SettingsMenu/Volume/HSlider.value = global.volume
-	$Music.play(global.music_time)
+	#$Music.play(global.music_time)
 	$GUI/Time/Label.text = start_day_time
 	spawn_points = $SpawnPoints.get_children()
 	villagers_spawn_timer.start()
 	world_time_timer.start()
 	$GUI.scale *= 1.5
 	get_tree().paused = true
+	
+	if global.world_day < 2:
+		for c in $YSort/Birds.get_children():
+			c.set_physics_process(false)
+		$YSort/Birds.visible = false
+	
+	$YSort/Villagers/Guardian.direction = Vector2.LEFT
+	$YSort/Villagers/Guardian.patrol_direction = Vector2.LEFT
+	
 	start_game()
+	
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
 	
-	if randf() < 0.1:
+	if global.world_day >= 3 and randf() < 0.1:
 		v = guardian_tscn.instance()
 	
 	if global.bool_rand():
@@ -70,6 +81,8 @@ func wasted() -> void:
 
 func set_pause() -> void:
 	$GUI/PauseMenu.visible = not $GUI/PauseMenu.visible
+	if dialog_system.visible:
+		return
 	get_tree().paused = not get_tree().paused
 
 func update_world_time() -> void:
@@ -101,7 +114,8 @@ func start_game() -> void:
 		$GUI/Day.visible = true
 		start_tween("start_game", true)
 	else:
-		get_tree().paused = false
+		#get_tree().paused = false
+		dialog_system.show_message(global.world_day)
 
 func start_tween(type:String, inverted:bool = false) -> void:
 	tween_type = type
@@ -139,7 +153,8 @@ func _on_Tween_tween_all_completed():
 	match tween_type:
 		"start_game":
 			$GUI/Day.visible = false
-			get_tree().paused = false
+			dialog_system.show_message(global.world_day)
+			#get_tree().paused = false
 		"end_day":
 			$GUI/Day.visible = true
 			for c in get_children():
@@ -155,7 +170,10 @@ func _on_Tween_tween_all_completed():
 		"wasted":
 			$GUI/PauseMenu.open_with_restart()
 
+func _on_WaterWell_body_entered(body):
+	if body is Player:
+		body.on_water_well = true
 
-
-
-
+func _on_WaterWell_body_exited(body):
+	if body is Player:
+		body.on_water_well = false

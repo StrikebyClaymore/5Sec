@@ -64,15 +64,13 @@ __meta__ = {
 visible = false
 
 [node name="Description" type="Label" parent="."]
+visible = false
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
 margin_left = 34.7302
 margin_top = 351.703
 margin_right = 469.73
 margin_bottom = 648.703
 custom_fonts/font = SubResource( 2 )
-text = "Бегать на wasd
-Подбирайте еду, пока дейстует правило пяти секунд
-Будьбе бдительны, ведь  стражники могут вас поймать"
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
