@@ -64,13 +64,14 @@ __meta__ = {
 visible = false
 
 [node name="Description" type="Label" parent="."]
-visible = false
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
 margin_left = 34.7302
 margin_top = 351.703
 margin_right = 469.73
 margin_bottom = 648.703
 custom_fonts/font = SubResource( 2 )
+text = "При выходе(Exit) прогресс не сохранятеся"
+autowrap = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -120,7 +121,9 @@ music
 Soundtrack by Monplaisir Loyalty Freak Music
 
 step sound
-Author: TinyWorlds"
+Author: TinyWorlds
+
+TES 2 Daggerfall: HALT!"
 __meta__ = {
 "_edit_use_anchors_": false
 }

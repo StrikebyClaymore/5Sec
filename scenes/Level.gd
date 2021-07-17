@@ -6,6 +6,8 @@ onready var player: Player = $YSort/Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
 onready var food: Node2D = $YSort/Food
 onready var dialog_system: Control = $GUI/DialogSystem
+onready var music: AudioStreamPlayer = $Music
+onready var volume_slider: HSlider = $GUI/PauseMenu/SettingsMenu/Volume/HSlider
 const  villager_tscn: PackedScene = preload("res://objects/Villager.tscn")
 const guardian_tscn: PackedScene = preload("res://objects/Guardian.tscn")
 var spawn_points: Array = []
@@ -20,9 +22,9 @@ var tween_type: String
 
 func _ready():
 	randomize()
-	$Music.set_volume_db(global.volume)
-	$GUI/PauseMenu/SettingsMenu/Volume/HSlider.value = global.volume
-	$Music.play(global.music_time)
+	music.set_volume_db(global.volume)
+	volume_slider.value = global.volume
+	music.play(global.music_time)
 	$GUI/Time/Label.text = start_day_time
 	spawn_points = $SpawnPoints.get_children()
 	villagers_spawn_timer.start()
@@ -34,9 +36,9 @@ func _ready():
 		for c in $YSort/Birds.get_children():
 			c.set_physics_process(false)
 		$YSort/Birds.visible = false
-	
+	$YSort/Villagers/Guardian.direction = Vector2.RIGHT
+	$YSort/Villagers/Guardian.patrol_direction = Vector2.RIGHT
 	start_game()
-	
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
@@ -103,7 +105,7 @@ func end_day() -> void:
 	$GUI/Day/Label.text = "Day " + str(global.world_day)
 	$GUI/Time.visible = false
 	start_tween("end_day")
-	global.music_time = $Music.get_playback_position()
+	global.music_time = music.get_playback_position()
 	get_tree().paused = true
 
 func start_game() -> void:
@@ -111,8 +113,10 @@ func start_game() -> void:
 		$GUI/Day.visible = true
 		start_tween("start_game", true)
 	else:
-		#get_tree().paused = false
-		dialog_system.show_message(global.world_day)
+		if global.world_day <= 3:
+			dialog_system.show_message(global.world_day)
+		else:
+			get_tree().paused = false
 
 func start_tween(type:String, inverted:bool = false) -> void:
 	tween_type = type
@@ -157,7 +161,7 @@ func _on_Tween_tween_all_completed():
 			for c in get_children():
 				if c.get("visible") and not c is TileMap:
 					c.visible = false
-			player.position = Vector2(114, 107)
+			player.position = $PlayerSpawnPoint.position
 			start_tween("next_day", true)
 		"next_day":
 			$GUI/Day.visible = false
@@ -172,5 +176,9 @@ func _on_WaterWell_body_entered(body):
 		body.on_water_well = true
 
 func _on_WaterWell_body_exited(body):
-	if body is Player:
-		body.on_water_well = false
+	if not body is Player:
+		return
+	body.on_water_well = false
+	for guard in get_tree().get_nodes_in_group("guardian"):
+		if guard.target == body:
+			guard.play_halt()

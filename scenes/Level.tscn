@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://resources/tilesets/town_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://resources/imgs/Food.png" type="Texture" id=5]
 [ext_resource path="res://objects/Food.gd" type="Script" id=6]
 [ext_resource path="res://scenes/DialogSystem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/Guardian.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/sound/monplaisir-loyalty-freak-music-soundtrack.ogg" type="AudioStream" id=9]
 [ext_resource path="res://scenes/SettingsMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=11]
@@ -32,26 +33,26 @@ extents = Vector2( 10, 170.639 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 310.791, 22.7629 )
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=8]
 radius = 37.475
 
-[sub_resource type="DynamicFontData" id=8]
+[sub_resource type="DynamicFontData" id=9]
 font_path = "res://resources/fonts/20832.ttf"
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 8 )
+font_data = SubResource( 9 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.54902 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=12]
 radius = 7.24193
 
 [node name="Level" type="Node2D"]
@@ -91,6 +92,9 @@ __meta__ = {
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Guardian" parent="YSort/Villagers" instance=ExtResource( 8 )]
+position = Vector2( 208.217, 106.353 )
 
 [node name="Birds" type="YSort" parent="YSort"]
 __meta__ = {
@@ -194,6 +198,12 @@ position = Vector2( 624.291, 80.9499 )
 [node name="bottom_right" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 623.761, 135.512 )
 
+[node name="PlayerSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 312, 75 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Road" type="Area2D" parent="."]
 position = Vector2( 312.487, 111.515 )
 __meta__ = {
@@ -211,7 +221,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterWell"]
-shape = SubResource( 12 )
+shape = SubResource( 8 )
 
 [node name="VillagersSpawnTimer" type="Timer" parent="."]
 one_shot = true
@@ -244,7 +254,7 @@ margin_left = -246.236
 margin_top = -158.218
 margin_right = -50.2363
 margin_bottom = -87.2182
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 10 )
 text = " WASTED"
 scroll_active = false
 __meta__ = {
@@ -257,7 +267,7 @@ margin_left = 300.0
 margin_top = 4.0
 margin_right = 340.0
 margin_bottom = 18.0
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,
@@ -290,7 +300,7 @@ margin_top = 96.0
 margin_right = 314.0
 margin_bottom = 110.0
 rect_scale = Vector2( 2, 2 )
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,
@@ -436,7 +446,7 @@ collision_layer = 34
 collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Food/Area2D"]
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Tween" type="Tween" parent="Food"]
 
