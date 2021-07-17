@@ -22,7 +22,7 @@ func _ready():
 	randomize()
 	$Music.set_volume_db(global.volume)
 	$GUI/PauseMenu/SettingsMenu/Volume/HSlider.value = global.volume
-	#$Music.play(global.music_time)
+	$Music.play(global.music_time)
 	$GUI/Time/Label.text = start_day_time
 	spawn_points = $SpawnPoints.get_children()
 	villagers_spawn_timer.start()
@@ -34,9 +34,6 @@ func _ready():
 		for c in $YSort/Birds.get_children():
 			c.set_physics_process(false)
 		$YSort/Birds.visible = false
-	
-	$YSort/Villagers/Guardian.direction = Vector2.LEFT
-	$YSort/Villagers/Guardian.patrol_direction = Vector2.LEFT
 	
 	start_game()
 	
