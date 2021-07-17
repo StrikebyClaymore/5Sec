@@ -2,6 +2,7 @@ extends Character
 class_name Player
 
 var on_road: bool = false
+var on_water_well: bool = false
 
 
 func _ready():

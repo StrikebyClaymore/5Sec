@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/DialogSystem.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.564706, 0.513726, 0.32549, 0.878431 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://resources/fonts/20832.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.576471, 0.505882, 0.305882, 1 )
+
+[node name="DialogSystem" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 960, 640 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.524
+anchor_right = 0.5
+anchor_bottom = 0.524
+margin_left = -240.0
+margin_top = -239.36
+margin_right = 240.0
+margin_bottom = 239.64
+rect_min_size = Vector2( 480, 160 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.499
+anchor_top = 0.521
+anchor_right = 0.499
+anchor_bottom = 0.521
+margin_left = -218.04
+margin_top = -217.44
+margin_right = 218.96
+margin_bottom = 217.56
+custom_fonts/font = SubResource( 3 )
+text = "Бегать на wasd
+Подбирайте еду, которую обранили горожане, чтобы заполнить шкалу сытости
+Будьбе бдительны, ведь  стражники могут вас поймать
+И самое главное, помните о правиле пяти секунд"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Close" type="Button" parent="."]
+anchor_left = 0.636
+anchor_top = 0.8
+anchor_right = 0.726
+anchor_bottom = 0.87
+margin_left = 0.439941
+margin_right = 0.039978
+margin_bottom = 0.199951
+focus_mode = 0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Close"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]

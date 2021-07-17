@@ -19,6 +19,10 @@ func _ready():
 
 func _physics_process(delta):
 	if state == States.FOLLOW:
+		if target.on_water_well:
+			direction = patrol_direction
+			move_process(delta)
+			return
 		if not on_road and not target.on_road:
 			direction = Vector2.ZERO
 			stop_anim()
