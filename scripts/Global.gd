@@ -5,6 +5,7 @@ var game: PackedScene = preload("res://scenes/Level.tscn")
 var volume: int = -30 setget set_volume
 var music_time: float = 0.0
 var world_day: int = 1
+var first_play: bool = true
 
 
 func set_volume(value:int) -> void:

@@ -16,6 +16,8 @@ func _ready():
 	patrol_direction = direction
 	road_point_y = position.y
 	state = States.PATROL
+	var strm = $Warning/HaltSound.stream as AudioStreamOGGVorbis
+	strm.set_loop(false)
 
 func _physics_process(delta):
 	if state == States.FOLLOW:
@@ -53,15 +55,20 @@ func catch_player() -> void:
 	get_tree().current_scene.wasted()
 	state = States.NONE
 
+func play_halt() -> void:
+	if not target.on_water_well:
+		$Warning.visible = true
+		$Warning/HaltSound.play()
+
 func _on_PlayerDetecter_body_entered(body):
 	if body is Player and on_road:
 		target = body
 		target_point = target.position
 		state = States.FOLLOW
+		play_halt()
 
 func _on_PlayerDetecter_body_exited(body):
 	if body == target:
 		target = null
 		back_to_road()
-
-
+		$Warning.visible = false

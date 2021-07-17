@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/HALT1.ogg-ea6dceafe22809105841270aeca3f500.oggstr"
+
+[deps]
+
+source_file="res://resources/sound/HALT1.ogg"
+dest_files=[ "res://.import/HALT1.ogg-ea6dceafe22809105841270aeca3f500.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
