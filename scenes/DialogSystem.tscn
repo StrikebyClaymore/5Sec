@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/DialogSystem.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.564706, 0.513726, 0.32549, 0.878431 )
+bg_color = Color( 0.780392, 0.713726, 0.462745, 0.878431 )
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -60,7 +60,7 @@ custom_fonts/font = SubResource( 3 )
 text = "Управление на wasd
 Пауза на Esc
 Подбирайте еду, которую обронили горожане, чтобы заполнить шкалу сытости
-Будьбе бдительны, ведь  стражники могут вас поймать, а птицы украсть еду, но это в будущем
+Вечером жители уходят домой
 Самое главное, помните о правиле пяти секунд"
 autowrap = true
 __meta__ = {

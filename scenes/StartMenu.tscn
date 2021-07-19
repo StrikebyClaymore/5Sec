@@ -70,7 +70,7 @@ margin_top = 351.703
 margin_right = 469.73
 margin_bottom = 648.703
 custom_fonts/font = SubResource( 2 )
-text = "При выходе(Exit) прогресс не сохранятеся"
+text = "При выходе в главное меню прогресс не сохранятеся"
 autowrap = true
 __meta__ = {
 "_edit_lock_": true,

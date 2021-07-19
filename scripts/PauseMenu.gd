@@ -4,6 +4,9 @@ extends Control
 func _input(event):
 	if event.is_action_pressed("esc"):
 		get_tree().current_scene.set_pause()
+	if event.is_action_pressed("space"):
+		if get_parent().get_node("DialogSystem").visible:
+			get_parent().get_node("DialogSystem")._on_Close_pressed()
 
 func open_with_restart() -> void:
 	$Panel/Resume.visible = false

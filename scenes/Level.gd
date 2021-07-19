@@ -14,7 +14,7 @@ var spawn_points: Array = []
 var satiety: int = 0
 var world_time: Dictionary = { hour = 8, minut = 0 }
 var start_day_time: String = "8:00"
-var end_day_time: int = 18
+var end_day_time: int = 20
 var min_villagers_spawn_time: int = 1
 var villagers_spawn_time: int = 3
 var tween_type: String
@@ -36,8 +36,8 @@ func _ready():
 		for c in $YSort/Birds.get_children():
 			c.set_physics_process(false)
 		$YSort/Birds.visible = false
-	$YSort/Villagers/Guardian.direction = Vector2.RIGHT
-	$YSort/Villagers/Guardian.patrol_direction = Vector2.RIGHT
+	#$YSort/Villagers/Guardian.direction = Vector2.RIGHT
+	#$YSort/Villagers/Guardian.patrol_direction = Vector2.RIGHT
 	start_game()
 
 func spawn_villager() ->  void:
@@ -92,6 +92,12 @@ func update_world_time() -> void:
 	$GUI/Time/Label.text = str(world_time.hour) + ":" + str(world_time.minut)
 	if world_time.minut == 0:
 		$GUI/Time/Label.text += str(0)
+	
+	if world_time.hour > 15:
+		$Shadow/Tween.interpolate_property($Shadow, "color",
+							$Shadow.color, $Shadow.color - Color(0.025, 0.025, 0.025, 0), 1.5,
+							Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Shadow/Tween.start()
 	if world_time.hour == end_day_time:
 		end_day()
 
@@ -113,10 +119,8 @@ func start_game() -> void:
 		$GUI/Day.visible = true
 		start_tween("start_game", true)
 	else:
-		if global.world_day <= 3:
-			dialog_system.show_message(global.world_day)
-		else:
-			get_tree().paused = false
+		dialog_system.show_message(global.world_day)
+
 
 func start_tween(type:String, inverted:bool = false) -> void:
 	tween_type = type
@@ -131,13 +135,25 @@ func start_tween(type:String, inverted:bool = false) -> void:
 	$Tween.start()
 
 func _on_VillagersSpawnTimer_timeout():
-	spawn_villager()
-	villagers_spawn_timer.wait_time = min_villagers_spawn_time + randi()%villagers_spawn_time + randf()
+	if world_time.hour >= 19:
+		for c in villagers.get_children():
+			if c.has_method("set_end_day"):
+				c.set_end_day()
+		return
+	if world_time.hour < 17:
+		spawn_villager()
+		villagers_spawn_timer.wait_time = min_villagers_spawn_time + randi()%villagers_spawn_time + randf()
+	else:
+		for c in villagers.get_children():
+			if c.has_method("stop_wait"):
+				c.stop_wait()
 	villagers_spawn_timer.start()
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("villager"):
 		body.queue_free()
+		if villagers.get_child_count() == 1 and world_time.hour >= 17:
+			wasted()
 
 func _on_Road_body_entered(body):
 	if body is Guardian or body is Player:
