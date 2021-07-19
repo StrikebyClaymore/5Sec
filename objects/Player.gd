@@ -7,7 +7,7 @@ var on_water_well: bool = false
 
 func _ready():
 	move_speed = 50.0
-	#$Camera2D.current = true
+	$Camera2D.current = true
 
 func _physics_process(delta):
 	input_process()

@@ -9,7 +9,6 @@ var min_drop_food_time: int = 2
 var drop_food_time: int = 8
 var min_wait_time: int = 3
 var wait_time: int = 5
-
 var wait: bool = false
 
 
@@ -28,6 +27,16 @@ func move_process(delta: float) -> void:
 		return
 	move_and_collide((direction * move_speed).clamped(move_speed) * delta)
 	play_anim()
+
+func set_end_day() -> void:
+	drop_food_timer.stop()
+	wait_timer.stop()
+	wait = false
+	move_speed = 50.0
+
+func stop_wait() -> void:
+	wait = false
+	wait_timer.stop()
 
 func _on_DropFoodTimer_timeout():
 	var f = food_tscn.instance()
