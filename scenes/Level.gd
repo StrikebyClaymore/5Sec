@@ -14,7 +14,7 @@ var spawn_points: Array = []
 var satiety: int = 0
 var world_time: Dictionary = { hour = 8, minut = 0 }
 var start_day_time: String = "8:00"
-var end_day_time: int = 20
+var end_day_time: int = 21
 var min_villagers_spawn_time: int = 1
 var villagers_spawn_time: int = 3
 var tween_type: String
@@ -140,10 +140,10 @@ func _on_VillagersSpawnTimer_timeout():
 			if c.has_method("set_end_day"):
 				c.set_end_day()
 		return
-	if world_time.hour < 17:
+	if world_time.hour < 18:
 		spawn_villager()
 		villagers_spawn_timer.wait_time = min_villagers_spawn_time + randi()%villagers_spawn_time + randf()
-	else:
+	elif world_time.hour == 18:
 		for c in villagers.get_children():
 			if c.has_method("stop_wait"):
 				c.stop_wait()
@@ -152,7 +152,7 @@ func _on_VillagersSpawnTimer_timeout():
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("villager"):
 		body.queue_free()
-		if villagers.get_child_count() == 1 and world_time.hour >= 17:
+		if world_time.hour >= 18 and villagers.get_child_count() == 1:
 			wasted()
 
 func _on_Road_body_entered(body):
