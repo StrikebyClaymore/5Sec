@@ -2,7 +2,7 @@ extends Node
 
 const start_menu: PackedScene = preload("res://scenes/StartMenu.tscn")
 const game: PackedScene = preload("res://scenes/Level.tscn")
-const end_scene: PackedScene = preload("res://Scenes/EndScene.tscn")
+const end_scene: PackedScene = preload("res://scenes/EndScene.tscn")
 var volume: int = -30 setget set_volume
 var music_time: float = 0.0
 var world_day: int = 1

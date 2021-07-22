@@ -5,7 +5,7 @@
 [ext_resource path="res://resources/imgs/bird_idle.png" type="Texture" id=3]
 [ext_resource path="res://objects/Bird.gd" type="Script" id=4]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
 shader_param/width = 1.0
 shader_param/outline_color = null
@@ -15,13 +15,13 @@ shader = ExtResource( 2 )
 shader_param/width = 1.0
 shader_param/outline_color = null
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.04657, 3.51844 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 106.776
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -66,7 +66,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -88,7 +88,7 @@ collision_mask = 32
 script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 7 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 4
@@ -106,7 +106,7 @@ region_rect = Rect2( 0, 0, 144, 192 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.132584, 1.90034 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="FoodDetecter" type="Area2D" parent="."]
 collision_layer = 2
@@ -114,14 +114,14 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FoodDetecter"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.5
-anims/move_down = SubResource( 4 )
-anims/move_left = SubResource( 5 )
-anims/move_right = SubResource( 6 )
-anims/move_top = SubResource( 7 )
+anims/move_down = SubResource( 3 )
+anims/move_left = SubResource( 4 )
+anims/move_right = SubResource( 5 )
+anims/move_top = SubResource( 6 )
 
 [node name="WaitTimer" type="Timer" parent="."]
 one_shot = true
