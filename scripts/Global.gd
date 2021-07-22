@@ -1,11 +1,13 @@
 extends Node
 
-var start_menu: PackedScene = preload("res://scenes/StartMenu.tscn")
-var game: PackedScene = preload("res://scenes/Level.tscn")
+const start_menu: PackedScene = preload("res://scenes/StartMenu.tscn")
+const game: PackedScene = preload("res://scenes/Level.tscn")
+const end_scene: PackedScene = preload("res://Scenes/EndScene.tscn")
 var volume: int = -30 setget set_volume
 var music_time: float = 0.0
 var world_day: int = 1
 var first_play: bool = true
+var continue_game: bool = false
 
 
 func set_volume(value:int) -> void:

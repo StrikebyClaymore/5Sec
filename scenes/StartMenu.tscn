@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/StartMenu.gd" type="Script" id=1]
-[ext_resource path="res://scenes/SettingsMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GUI/SettingsMenu.tscn" type="PackedScene" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://resources/fonts/20832.ttf"
@@ -123,7 +123,9 @@ Soundtrack by Monplaisir Loyalty Freak Music
 step sound
 Author: TinyWorlds
 
-TES 2 Daggerfall: HALT!"
+TES 2 Daggerfall: HALT!
+
+Spaceship 2D, feel free to use it however you like, SVG file included. If you want more graphics like this visit https://gameassets.itch.io"
 __meta__ = {
 "_edit_use_anchors_": false
 }

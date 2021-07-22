@@ -11,8 +11,8 @@ var road_point_y: float
 
 func _ready():
 	move_speed = 45
-	direction = Vector2.RIGHT
 	free_fly_direction = direction
+	road_point_y = position.y
 	state = States.FREE_FLY
 
 func _physics_process(delta):
@@ -36,6 +36,7 @@ func catch_mob() -> void:
 	animator.play("catch_mob")
 
 func transport_mob_to_ufo() -> void:
+	target.locked = true
 	target.set_front()
 	target.animator.play("transport_to_ufo")
 
@@ -43,6 +44,8 @@ func transport_mob_ended() -> void:
 	if target is Player:
 		get_tree().current_scene.wasted()
 		return
+	if target is Bird:
+		animator.play("blink_back_to_road")
 	direction = free_fly_direction
 	state = States.FREE_FLY
 	target.queue_free()
@@ -54,14 +57,22 @@ func blink_to_road() -> void:
 	direction = free_fly_direction
 	state = States.FREE_FLY
 
-func _on_MobsDetecter_body_entered(body):
-	if can_catch and not target and body is Character:
+func set_target(body: Character) -> bool:
+	if can_catch and not target and body is Character and not body.locked:
 		target = body
 		state = States.FOLLOW
-		road_point_y = position.y
+	return false
+
+func _on_MobsDetecter_body_entered(body):
+	set_target(body)
 
 func _on_CatchColdownTimer_timeout():
 	can_catch = true
+	if not target:
+		for body in $MobsDetecter.get_overlapping_bodies():
+			if position.direction_to(body.position).x == free_fly_direction.x:
+				if set_target(body):
+					return
 
 func _on_MobsDetecter_body_exited(body):
 	if body == target:

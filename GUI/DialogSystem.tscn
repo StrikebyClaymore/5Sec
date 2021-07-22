@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/DialogSystem.gd" type="Script" id=1]
+[ext_resource path="res://GUI/DialogSystem.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.780392, 0.713726, 0.462745, 0.878431 )
@@ -26,8 +26,10 @@ anchor_bottom = 1.0
 rect_min_size = Vector2( 960, 640 )
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_horizontal_guides_": [  ],
 "_edit_lock_": true,
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
 }
 
 [node name="Panel" type="Panel" parent="."]
