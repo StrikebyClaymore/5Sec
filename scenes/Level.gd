@@ -48,7 +48,7 @@ func spawn_villager() ->  void:
 	if global.world_day >= 3 and global.world_day != 4 and randf() < 0.1:
 		v = guardian_tscn.instance()
 	
-	elif global.world_day >= 4 and randf() < 0.05 or spawn_counter == 10:
+	elif global.world_day >= 4 and randf() < 0.05 or (global.world_day >= 4 and spawn_counter == 10):
 		v = ufo_tscn.instance()
 		spawn_counter = 0
 	
