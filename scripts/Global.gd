@@ -4,7 +4,7 @@ var start_menu: PackedScene = preload("res://scenes/StartMenu.tscn")
 var game: PackedScene = preload("res://scenes/Level.tscn")
 var volume: int = -30 setget set_volume
 var music_time: float = 0.0
-var world_day: int = 3
+var world_day: int = 1
 var first_play: bool = true
 
 

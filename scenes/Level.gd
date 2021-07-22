@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var villagers: YSort = $YSort/Villagers
+onready var villagers: YSort = $YSort/Mobs
 onready var villagers_spawn_timer: Timer = $VillagersSpawnTimer
 onready var player: Player = $YSort/Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
@@ -36,8 +36,8 @@ func _ready():
 		for c in $YSort/Birds.get_children():
 			c.set_physics_process(false)
 		$YSort/Birds.visible = false
-	#$YSort/Villagers/Guardian.direction = Vector2.RIGHT
-	#$YSort/Villagers/Guardian.patrol_direction = Vector2.RIGHT
+	#$YSort/Mobs/Guardian.direction = Vector2.LEFT
+	#$YSort/Mobs/Guardian.patrol_direction = Vector2.LEFT
 	start_game()
 
 func spawn_villager() ->  void:
@@ -150,7 +150,7 @@ func _on_VillagersSpawnTimer_timeout():
 	villagers_spawn_timer.start()
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("villager"):
+	if body.is_in_group("mob") and not body is Player:
 		body.queue_free()
 		if world_time.hour >= 18 and villagers.get_child_count() == 1:
 			wasted()

@@ -19,3 +19,5 @@ step sound
 Author: TinyWorlds
 
 TES 2 Daggerfall: HALT!
+
+Spaceship 2D, feel free to use it however you like, SVG file included. If you want more graphics like this visit https://gameassets.itch.io

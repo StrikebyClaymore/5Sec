@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://objects/Player.gd"
 }, {
 "base": "Character",
+"class": "UFO",
+"language": "GDScript",
+"path": "res://objects/UFO.gd"
+}, {
+"base": "Character",
 "class": "Villager",
 "language": "GDScript",
 "path": "res://objects/Villager.gd"
@@ -45,6 +50,7 @@ _global_script_class_icons={
 "Food": "",
 "Guardian": "",
 "Player": "",
+"UFO": "",
 "Villager": ""
 }
 

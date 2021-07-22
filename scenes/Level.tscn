@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://resources/tilesets/town_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 [ext_resource path="res://objects/Bird.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/UFO.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/DialogSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/sound/monplaisir-loyalty-freak-music-soundtrack.ogg" type="AudioStream" id=9]
 [ext_resource path="res://scenes/SettingsMenu.tscn" type="PackedScene" id=10]
@@ -82,10 +83,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Villagers" type="YSort" parent="YSort"]
+[node name="Mobs" type="YSort" parent="YSort"]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="UFO" parent="YSort/Mobs" instance=ExtResource( 5 )]
+position = Vector2( 164.588, 24.3635 )
 
 [node name="Birds" type="YSort" parent="YSort"]
 __meta__ = {
@@ -158,10 +162,12 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 309.543, -11.1118 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 311.924, 330.973 )
 shape = SubResource( 4 )
+disabled = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( -18.8857, 156.859 )
@@ -418,6 +424,9 @@ stream = ExtResource( 9 )
 volume_db = -30.0
 
 [node name="Shadow" type="CanvasModulate" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Tween" type="Tween" parent="Shadow"]
 
