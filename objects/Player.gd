@@ -6,13 +6,12 @@ var on_water_well: bool = false
 
 
 func _ready():
-	move_speed = 50.0
+	move_speed = 90.0
 	$Camera2D.current = true
 
 func _physics_process(delta):
 	input_process()
 	move_process()
-	pass
 
 func input_process() -> void:
 	direction.x = Input.get_action_strength("d") - Input.get_action_strength("a")

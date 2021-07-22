@@ -5,8 +5,9 @@ onready var animator: AnimationPlayer = $AnimationPlayer
 onready var step_audio_player = $AudioStreamPlayer2D
 var move_speed: float = 40.0
 var direction: = Vector2()
-var max_hp: int = 100
-var hp: int = 100
+var locked: bool = false
+#var max_hp: int = 100
+#var hp: int = 100
 
 
 func play_anim() -> void:
@@ -32,7 +33,10 @@ func stop_anim() -> void:
 	$Sprite.frame_coords.x = 0
 	step_audio_player.stop()
 
-func on_hit(dmg:int) -> void:
-	hp = max(0, hp - dmg)
-	if hp == 0:
-		queue_free()
+func set_front() -> void:
+	$Sprite.frame_coords = Vector2(0, 0)
+
+#func on_hit(dmg:int) -> void:
+#	hp = max(0, hp - dmg)
+#	if hp == 0:
+#		queue_free()

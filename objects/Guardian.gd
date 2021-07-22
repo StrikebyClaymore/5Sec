@@ -1,7 +1,7 @@
 extends Character
 class_name Guardian
 
-enum States {NONE, PATROL, FOLLOW, BACk_TO_ROAD}
+enum States { NONE, PATROL, FOLLOW, BACk_TO_ROAD }
 var state = States.NONE
 var patrol_direction: Vector2
 var target: Player

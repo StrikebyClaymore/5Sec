@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var villagers: YSort = $YSort/Villagers
+onready var villagers: YSort = $YSort/Mobs
 onready var villagers_spawn_timer: Timer = $VillagersSpawnTimer
 onready var player: Player = $YSort/Player
 onready var world_time_timer: Timer = $GUI/Time/Timer
@@ -10,6 +10,7 @@ onready var music: AudioStreamPlayer = $Music
 onready var volume_slider: HSlider = $GUI/PauseMenu/SettingsMenu/Volume/HSlider
 const  villager_tscn: PackedScene = preload("res://objects/Villager.tscn")
 const guardian_tscn: PackedScene = preload("res://objects/Guardian.tscn")
+const ufo_tscn: PackedScene = preload("res://objects/UFO.tscn")
 var spawn_points: Array = []
 var satiety: int = 0
 var world_time: Dictionary = { hour = 8, minut = 0 }
@@ -18,6 +19,7 @@ var end_day_time: int = 21
 var min_villagers_spawn_time: int = 1
 var villagers_spawn_time: int = 3
 var tween_type: String
+var spawn_counter: int = 0
 
 
 func _ready():
@@ -36,17 +38,22 @@ func _ready():
 		for c in $YSort/Birds.get_children():
 			c.set_physics_process(false)
 		$YSort/Birds.visible = false
-	#$YSort/Villagers/Guardian.direction = Vector2.RIGHT
-	#$YSort/Villagers/Guardian.patrol_direction = Vector2.RIGHT
+	#$YSort/Mobs/Guardian.direction = Vector2.LEFT
+	#$YSort/Mobs/Guardian.patrol_direction = Vector2.LEFT
 	start_game()
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
 	
-	if global.world_day >= 3 and randf() < 0.1:
+	if global.world_day >= 3 and global.world_day != 4 and randf() < 0.1:
 		v = guardian_tscn.instance()
 	
-	if global.bool_rand():
+	elif global.world_day >= 4 and randf() < 0.05 or spawn_counter == 10:
+		v = ufo_tscn.instance()
+		spawn_counter = 0
+	
+	var side: bool = global.bool_rand()
+	if side:
 		v.position.x = spawn_points[0].position.x
 		v.position.y = rand_range(spawn_points[0].position.y, spawn_points[1].position.y)
 		v.direction = Vector2.RIGHT
@@ -54,8 +61,17 @@ func spawn_villager() ->  void:
 		v.position.x = spawn_points[2].position.x
 		v.position.y = rand_range(spawn_points[2].position.y, spawn_points[3].position.y)
 		v.direction = Vector2.LEFT
+	
+	if v is UFO:
+		if side:
+			v.position.x += 32
+		else:
+			v.position.x -= 32
+		v.position.y -= 72
+	
 	add_villagers_colliding_exeption(v)
 	villagers.add_child(v)
+	spawn_counter += 1
 
 func eat_food(value:int) ->  void:
 	satiety = min(100, satiety + value)
@@ -80,7 +96,7 @@ func wasted() -> void:
 
 func set_pause() -> void:
 	$GUI/PauseMenu.visible = not $GUI/PauseMenu.visible
-	if dialog_system.visible:
+	if dialog_system.visible or (tween_type == "start_game" and $Tween.is_active()):
 		return
 	get_tree().paused = not get_tree().paused
 
@@ -121,7 +137,6 @@ func start_game() -> void:
 	else:
 		dialog_system.show_message(global.world_day)
 
-
 func start_tween(type:String, inverted:bool = false) -> void:
 	tween_type = type
 	var start_color: = Color(1, 1, 1)
@@ -150,7 +165,7 @@ func _on_VillagersSpawnTimer_timeout():
 	villagers_spawn_timer.start()
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("villager"):
+	if body.is_in_group("mob") and not body is Player:
 		body.queue_free()
 		if world_time.hour >= 18 and villagers.get_child_count() == 1:
 			wasted()

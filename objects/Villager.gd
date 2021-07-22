@@ -13,6 +13,8 @@ var wait: bool = false
 
 
 func _ready():
+	if locked:
+		return
 	set_timer_wait_time(drop_food_timer, min_drop_food_time, drop_food_time)
 	drop_food_timer.start()
 	set_timer_wait_time(wait_timer, min_wait_time, wait_time)
