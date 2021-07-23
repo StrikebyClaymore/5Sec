@@ -40,6 +40,7 @@ func _ready():
 		$YSort/Birds.visible = false
 	#$YSort/Mobs/Guardian.direction = Vector2.LEFT
 	#$YSort/Mobs/Guardian.patrol_direction = Vector2.LEFT
+	start_game()
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
