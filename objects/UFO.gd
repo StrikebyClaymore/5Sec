@@ -44,12 +44,11 @@ func transport_mob_ended() -> void:
 	if target is Player:
 		get_tree().current_scene.wasted()
 		return
-	if target is Bird:
-		animator.play("blink_back_to_road")
 	direction = free_fly_direction
 	state = States.FREE_FLY
 	target.queue_free()
 	target = null
+	animator.play("blink_back_to_road")
 	$CatchColdownTimer.start()
 
 func blink_to_road() -> void:
@@ -61,6 +60,7 @@ func set_target(body: Character) -> bool:
 	if can_catch and not target and body is Character and not body.locked:
 		target = body
 		state = States.FOLLOW
+		target.locked = true
 	return false
 
 func _on_MobsDetecter_body_entered(body):

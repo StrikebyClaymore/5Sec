@@ -40,13 +40,13 @@ func _ready():
 		$YSort/Birds.visible = false
 	#$YSort/Mobs/Guardian.direction = Vector2.LEFT
 	#$YSort/Mobs/Guardian.patrol_direction = Vector2.LEFT
-	start_game()
 
 func spawn_villager() ->  void:
 	var v: Character = villager_tscn.instance()
 	
-	if global.world_day >= 3 and global.world_day != 4 and randf() < 0.1:
+	if global.world_day >= 3 and global.world_day != 4 and (randf() < 0.1 or (spawn_counter == 8 and global.world_day == 3)):
 		v = guardian_tscn.instance()
+		spawn_counter = 0
 	
 	elif global.world_day >= 4 and randf() < 0.05 or (global.world_day >= 4 and spawn_counter == 10):
 		v = ufo_tscn.instance()
@@ -67,11 +67,21 @@ func spawn_villager() ->  void:
 			v.position.x += 32
 		else:
 			v.position.x -= 32
-		v.position.y -= 72
+		v.position.y -= 52
 	
 	add_villagers_colliding_exeption(v)
 	villagers.add_child(v)
 	spawn_counter += 1
+
+#func spawn_ufo():
+#	var v: UFO = ufo_tscn.instance()
+#	v.position.x = spawn_points[0].position.x
+#	v.position.y = rand_range(spawn_points[0].position.y, spawn_points[1].position.y)
+#	v.direction = Vector2.RIGHT
+#	v.position.x += 32
+#	v.position.y -= 52
+#	add_villagers_colliding_exeption(v)
+#	villagers.add_child(v)
 
 func eat_food(value:int) ->  void:
 	satiety = min(100, satiety + value)
