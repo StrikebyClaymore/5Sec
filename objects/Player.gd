@@ -6,12 +6,12 @@ var on_water_well: bool = false
 
 
 func _ready():
-	move_speed = 50.0
+	move_speed = 160.0
 	$Camera2D.current = true
 
 func _physics_process(delta):
 	input_process()
-	move_process()
+	move_process(delta)
 
 func input_process() -> void:
 	direction.x = Input.get_action_strength("d") - Input.get_action_strength("a")
@@ -23,7 +23,7 @@ func input_process() -> void:
 #		get_tree().current_scene.add_child(f)
 #		f.init()
 
-func move_process() -> void:
+func move_process(delta:float) -> void:
 	if direction == Vector2.ZERO:
 		stop_anim()
 		return
