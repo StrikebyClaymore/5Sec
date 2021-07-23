@@ -116,7 +116,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 119.566, 113.418 )
+position = Vector2( 312, 76 )
 
 [node name="Bounds" type="Node2D" parent="."]
 __meta__ = {
