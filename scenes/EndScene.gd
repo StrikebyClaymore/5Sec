@@ -1,6 +1,6 @@
 extends Control
 
-const scroll_speed: float = 120.0
+const scroll_speed: float = 50.0
 var food_tscn: PackedScene = preload("res://objects/Food.tscn")
 
 func _ready():
@@ -20,7 +20,7 @@ func _process(delta):
 	if $Background2.position.y <= -320 + scroll_speed * delta:
 		$Background2.position.y = 320
 	if has_node("CanvasLayer/Authors"):
-		$CanvasLayer/Authors.rect_position.y -= scroll_speed * delta * 10
+		$CanvasLayer/Authors.rect_position.y -= scroll_speed * delta
 		if $CanvasLayer/Authors.rect_position.y < -1000:
 			$CanvasLayer/Authors.queue_free()
 			$CanvasLayer/DialogWindow.visible = true

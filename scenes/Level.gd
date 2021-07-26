@@ -20,6 +20,7 @@ var min_villagers_spawn_time: int = 1
 var villagers_spawn_time: int = 3
 var tween_type: String
 var spawn_counter: int = 0
+var day_ended: bool = false
 
 
 func _ready():
@@ -49,7 +50,7 @@ func spawn_villager() ->  void:
 		v = guardian_tscn.instance()
 		spawn_counter = 0
 	
-	elif global.world_day >= 4 and randf() < 0.05 or (global.world_day >= 4 and spawn_counter == 10):
+	elif global.world_day >= 4 and randf() < 0.05 or (global.world_day >= 4 and spawn_counter == 8):
 		v = ufo_tscn.instance()
 		spawn_counter = 0
 	
@@ -87,7 +88,9 @@ func spawn_villager() ->  void:
 func eat_food(value:int) ->  void:
 	satiety = min(100, satiety + value)
 	update_gui()
-	if $GUI/SatietyeProgress.value >= $GUI/SatietyeProgress.max_value:
+	if not day_ended and $GUI/SatietyeProgress.value >= $GUI/SatietyeProgress.max_value:
+		day_ended = true
+		$GUI/Time/Timer.stop()
 		end_day()
 
 func update_gui() -> void:

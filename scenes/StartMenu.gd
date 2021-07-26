@@ -1,6 +1,10 @@
 extends Control
 
 
+func _ready():
+	#OS.window_fullscreen = true
+	pass
+
 func _on_Start_pressed():
 	get_tree().change_scene_to(global.game)
 

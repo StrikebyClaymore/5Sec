@@ -9,40 +9,40 @@
 [ext_resource path="res://GUI/SettingsMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=11]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 316.622, 10 )
-
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 170.639 )
+extents = Vector2( 316.622, 10 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 316.622, 10 )
+extents = Vector2( 10, 170.639 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 316.622, 10 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10, 170.639 )
+extents = Vector2( 316.622, 10 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 10, 170.639 )
 
 [sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 10, 170.639 )
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 310.791, 22.7629 )
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=9]
 radius = 37.475
 
-[sub_resource type="DynamicFontData" id=9]
+[sub_resource type="DynamicFontData" id=10]
 font_path = "res://resources/fonts/20832.ttf"
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=11]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 9 )
+font_data = SubResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.54902 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -133,19 +133,19 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 309.543, -11.1118 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 311.924, 330.973 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( -10.3181, 156.359 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 634.167, 153.978 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Bounds"]
 collision_layer = 8
@@ -157,21 +157,21 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 309.543, -11.1118 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 311.924, 330.973 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( -18.8857, 156.859 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 646.897, 153.978 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 __meta__ = {
@@ -205,7 +205,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Road"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="WaterWell" type="Area2D" parent="."]
 position = Vector2( 312.186, 52.385 )
@@ -215,7 +215,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterWell"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="VillagersSpawnTimer" type="Timer" parent="."]
 one_shot = true
@@ -247,7 +247,7 @@ margin_left = -246.236
 margin_top = -158.218
 margin_right = -50.2363
 margin_bottom = -87.2182
-custom_fonts/normal_font = SubResource( 10 )
+custom_fonts/normal_font = SubResource( 11 )
 text = " WASTED"
 scroll_active = false
 __meta__ = {
@@ -260,7 +260,7 @@ margin_left = 300.0
 margin_top = 4.0
 margin_right = 340.0
 margin_bottom = 18.0
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 12 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,
@@ -293,7 +293,7 @@ margin_top = 96.0
 margin_right = 314.0
 margin_bottom = 110.0
 rect_scale = Vector2( 2, 2 )
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 12 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,

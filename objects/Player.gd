@@ -13,16 +13,16 @@ func _physics_process(delta):
 	input_process()
 	move_process()
 
-func _process(delta):
-	if direction.x > 0:
-		global_position.x = ceil(global_position.x)
-	elif direction.x < 0:
-		global_position.x = floor(global_position.x)
-	elif direction.y > 0:
-		global_position.y = ceil(global_position.y)
-	elif direction.y < 0:
-		global_position.y = floor(global_position.y)
-	force_update_transform()
+#func _process(delta):
+#	if direction.x > 0:
+#		global_position.x = ceil(global_position.x)
+#	elif direction.x < 0:
+#		global_position.x = floor(global_position.x)
+#	elif direction.y > 0:
+#		global_position.y = ceil(global_position.y)
+#	elif direction.y < 0:
+#		global_position.y = floor(global_position.y)
+#	force_update_transform()
 
 func input_process() -> void:
 	direction.x = Input.get_action_strength("d") - Input.get_action_strength("a")
