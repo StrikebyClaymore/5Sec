@@ -318,16 +318,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogSystem" parent="GUI" instance=ExtResource( 7 )]
-visible = false
-anchor_right = 0.679
-anchor_bottom = 0.669
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 288.16
-margin_bottom = 191.84
-rect_scale = Vector2( 0.7, 0.7 )
-
 [node name="MobileGUI" type="Control" parent="GUI"]
 visible = false
 margin_right = 40.0
@@ -378,6 +368,16 @@ text = "PAUSE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DialogSystem" parent="GUI" instance=ExtResource( 7 )]
+visible = false
+anchor_right = 0.679
+anchor_bottom = 0.669
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 288.16
+margin_bottom = 191.84
+rect_scale = Vector2( 0.7, 0.7 )
 
 [node name="PauseMenu" type="Control" parent="GUI"]
 pause_mode = 2
