@@ -360,12 +360,13 @@ __meta__ = {
 }
 
 [node name="Disk" type="Sprite" parent="GUI/MobileGUI/PlayerController"]
-position = Vector2( 72, 360 )
-scale = Vector2( 3, 3 )
+position = Vector2( 132, 320 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 6 )
 
 [node name="Controller" type="Sprite" parent="GUI/MobileGUI/PlayerController"]
-position = Vector2( 72, 360 )
+position = Vector2( 132, 320 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 6 )
 
 [node name="Pause" type="Button" parent="GUI/MobileGUI"]

@@ -19,11 +19,11 @@ func _input(ev):
 	if pressed and (ev is InputEventMouseMotion or ev is InputEventScreenDrag):
 		var pos = ev.position * Vector2(0.75, 0.75) / Vector2(1.125, 1.125)
 		var size = $Disk.texture.get_data().get_size()*$Disk.scale
-		var c_size = $Controller.texture.get_data().get_width()
+		var c_size = $Controller.texture.get_data().get_width()*$Controller.scale.x
 		var dir = ($Disk.position - pos).normalized()
 		var dist = pos.distance_to($Disk.position)
 		
-		if dist <= 46 - c_size/2:#size.x/2:
+		if dist <= 46+32 - c_size/2:#size.x/2: # WHAT THE SHIT CODE??? FIX IT
 			$Controller.position = pos
 			speed_vector = dir*dist
 		else:
