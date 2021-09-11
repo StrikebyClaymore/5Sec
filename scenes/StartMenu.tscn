@@ -22,6 +22,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.776471 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -140,7 +141,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DeviceSetup" type="Control" parent="."]
+margin_left = 783.89
+margin_top = 26.4737
+margin_right = 857.89
+margin_bottom = 76.4737
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PC" type="CheckBox" parent="DeviceSetup"]
+margin_right = 24.0
+margin_bottom = 24.0
+text = "PC"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mobile" type="CheckBox" parent="DeviceSetup"]
+margin_left = 0.445435
+margin_top = 23.6088
+margin_right = 72.4454
+margin_bottom = 47.6088
+text = "Mobile"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="LookAuthors" to="." method="_on_LookAuthors_pressed"]
 [connection signal="pressed" from="Authors/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="DeviceSetup/PC" to="." method="_on_PC_pressed"]
+[connection signal="pressed" from="DeviceSetup/Mobile" to="." method="_on_Mobile_pressed"]

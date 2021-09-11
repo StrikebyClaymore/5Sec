@@ -25,6 +25,10 @@ var day_ended: bool = false
 
 func _ready():
 	randomize()
+	
+	if global.platform == 2:
+		$GUI/MobileGUI.visible = true
+	
 	music.set_volume_db(global.volume)
 	volume_slider.value = global.volume
 	music.play(global.music_time)
@@ -227,3 +231,6 @@ func _on_WaterWell_body_exited(body):
 	for guard in get_tree().get_nodes_in_group("guardian"):
 		if guard.target == body:
 			guard.play_halt()
+
+func _on_Pause_pressed() -> void:
+	set_pause()

@@ -1,48 +1,50 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://resources/tilesets/town_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 [ext_resource path="res://objects/Bird.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/PlayerController.gd" type="Script" id=5]
+[ext_resource path="res://resources/imgs/button_image.png" type="Texture" id=6]
 [ext_resource path="res://GUI/DialogSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/sound/monplaisir-loyalty-freak-music-soundtrack.ogg" type="AudioStream" id=9]
 [ext_resource path="res://GUI/SettingsMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=11]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 316.622, 10 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 170.639 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 316.622, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 316.622, 10 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 316.622, 10 )
+extents = Vector2( 10, 170.639 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 10, 170.639 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 10, 170.639 )
-
-[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 310.791, 22.7629 )
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=8]
 radius = 37.475
 
-[sub_resource type="DynamicFontData" id=10]
+[sub_resource type="DynamicFontData" id=9]
 font_path = "res://resources/fonts/20832.ttf"
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=10]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = SubResource( 10 )
+font_data = SubResource( 9 )
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.0784314, 0.0784314, 0.0784314, 0.54902 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -133,19 +135,19 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 309.543, -11.1118 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 311.924, 330.973 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( -10.3181, 156.359 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds/StaticBody2D"]
 position = Vector2( 634.167, 153.978 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Bounds"]
 collision_layer = 8
@@ -157,21 +159,21 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 309.543, -11.1118 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 311.924, 330.973 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( -18.8857, 156.859 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds/Area2D"]
 position = Vector2( 646.897, 153.978 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 __meta__ = {
@@ -205,7 +207,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Road"]
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="WaterWell" type="Area2D" parent="."]
 position = Vector2( 312.186, 52.385 )
@@ -215,7 +217,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterWell"]
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="VillagersSpawnTimer" type="Timer" parent="."]
 one_shot = true
@@ -247,7 +249,7 @@ margin_left = -246.236
 margin_top = -158.218
 margin_right = -50.2363
 margin_bottom = -87.2182
-custom_fonts/normal_font = SubResource( 11 )
+custom_fonts/normal_font = SubResource( 10 )
 text = " WASTED"
 scroll_active = false
 __meta__ = {
@@ -260,7 +262,7 @@ margin_left = 300.0
 margin_top = 4.0
 margin_right = 340.0
 margin_bottom = 18.0
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,
@@ -293,7 +295,7 @@ margin_top = 96.0
 margin_right = 314.0
 margin_bottom = 110.0
 rect_scale = Vector2( 2, 2 )
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true,
@@ -325,6 +327,56 @@ margin_top = -20.0
 margin_right = 288.16
 margin_bottom = 191.84
 rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="MobileGUI" type="Control" parent="GUI"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerController" type="Control" parent="GUI/MobileGUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 632.0
+margin_bottom = 440.0
+rect_min_size = Vector2( 672, 480 )
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Screen" type="Panel" parent="GUI/MobileGUI/PlayerController"]
+visible = false
+modulate = Color( 1, 1, 1, 0.576471 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -32.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Disk" type="Sprite" parent="GUI/MobileGUI/PlayerController"]
+position = Vector2( 72, 360 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="Controller" type="Sprite" parent="GUI/MobileGUI/PlayerController"]
+position = Vector2( 72, 360 )
+texture = ExtResource( 6 )
+
+[node name="Pause" type="Button" parent="GUI/MobileGUI"]
+margin_left = 564.0
+margin_top = 8.0
+margin_right = 617.0
+margin_bottom = 28.0
+text = "PAUSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PauseMenu" type="Control" parent="GUI"]
 pause_mode = 2
@@ -440,6 +492,7 @@ zoom = Vector2( 0.7, 0.5 )
 [connection signal="timeout" from="VillagersSpawnTimer" to="." method="_on_VillagersSpawnTimer_timeout"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="GUI/Time/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="GUI/MobileGUI/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Resume" to="GUI/PauseMenu" method="_on_Resume_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Restart" to="GUI/PauseMenu" method="_on_Restart_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/Panel/Settings" to="GUI/PauseMenu" method="_on_Settings_pressed"]

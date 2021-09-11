@@ -42,6 +42,7 @@ margin_top = -239.36
 margin_right = 240.0
 margin_bottom = 239.64
 rect_min_size = Vector2( 480, 160 )
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true,

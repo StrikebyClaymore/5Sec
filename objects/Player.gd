@@ -6,6 +6,7 @@ var on_water_well: bool = false
 
 
 func _ready():
+	global.player = self
 	move_speed = 50.0
 	$Camera2D.current = true
 
@@ -25,6 +26,8 @@ func _physics_process(delta):
 #	force_update_transform()
 
 func input_process() -> void:
+	if global.platform == 2:
+		return
 	direction.x = Input.get_action_strength("d") - Input.get_action_strength("a")
 	direction.y = Input.get_action_strength("s") - Input.get_action_strength("w")
 	

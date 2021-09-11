@@ -8,6 +8,10 @@ var music_time: float = 0.0
 var world_day: int = 1
 var first_play: bool = true
 var continue_game: bool = false
+var player: Player = null
+
+enum platforms { NONE = 0, PC = 1, MOBILE = 2 }
+var platform = platforms.NONE
 
 
 func set_volume(value:int) -> void:
